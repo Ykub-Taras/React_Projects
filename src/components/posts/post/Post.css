@@ -1,0 +1,11 @@
+.postBlock {
+    margin: 5px;
+    width: 40vw;
+    padding: 10px;
+    box-sizing: border-box;
+    border: #284e5e solid 3px;
+}
+
+.block {margin: 10px;
+    background-color: #c5f7f2
+}
