@@ -31,6 +31,7 @@ export default function Users() {
         usersList[i].post = x;
         // console.log(usersList[i])
     }
+
     return (
         <div className={'itemBlock'}>
             {usersList.map(value =>
