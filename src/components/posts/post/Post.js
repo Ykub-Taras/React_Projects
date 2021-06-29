@@ -2,7 +2,14 @@ export default function Post({postDataBlock: {id, title, body}}) {
     return (
         <div>
             <div>
-                <p>#{id} - {title}</p>
+                <p>#{id} - {title}
+                    <button
+                                    onClick={() => {
+                                        console.log('comments')
+                                    }}
+                                >View all comments on post
+                                </button>
+                </p>
                 <p>{body}</p>
             </div>
         </div>

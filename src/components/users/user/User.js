@@ -4,6 +4,10 @@ export default function User({userDataBlock: {id, name, username}}) {
         <div>
             <h2>
                 {name}, # {id} ({username})
+                <button onClick={() => {
+                    console.log('posts')
+                }}>View all posts of user
+                </button>
             </h2>
         </div>
     );
