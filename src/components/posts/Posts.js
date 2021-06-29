@@ -1,10 +1,9 @@
 import Post from "./post/Post";
 
-export default function Posts({postsDataBlock, commentsInfo, stylePosts}) {
+export default function Posts({postsDataBlock, postsInfo}) {
     return (
-        <div style={{display: stylePosts}}>
-            {postsDataBlock.map(postsDataBlock => <Post key={postsDataBlock.id} postsDataBlock={postsDataBlock}
-                                                        commentsInfo={commentsInfo}/>)}
+        <div>
+            {postsDataBlock.map(postsDataBlock => <Post key={postsDataBlock.id} postsDataBlock={postsDataBlock} postsInfo={postsInfo}/>)}
         </div>
     );
 }

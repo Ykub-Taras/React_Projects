@@ -1,16 +1,11 @@
-export default function Post({postsDataBlock: {id, title, body}, commentsInfo}) {
+export default function Post({postsDataBlock: {id, title}, postsInfo}) {
     return (
         <div>
-            <p>#{id} - {title}</p>
-            <p>
-                {body}</p>
-            <button
+           <b> #{id}</b> - {title}   <button
                 onClick={() => {
-                    commentsInfo(id);
-                    localStorage.setItem("stylePosts", JSON.stringify('none'));
-                    localStorage.setItem("styleComments", JSON.stringify('block'));
-                }}
-            >View all comments on post
+                    postsInfo(id);
+                              }}
+            >View post info
             </button>
         </div>
     );
