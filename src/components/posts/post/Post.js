@@ -1,37 +1,24 @@
+import {useState} from "react";
+import {getComment} from "../../../services/api";
+
 export default function Post({postDataBlock: {id, title, body}}) {
+    let [comment, setComment] = useState([])
     return (
         <div>
             <div>
                 <p>#{id} - {title}
-                    <button
-                                    onClick={() => {
-                                        console.log('comments')
-                                    }}
-                                >View all comments on post
-                                </button>
+                    <button onClick={() => {
+                        getComment(id).then(value => setComment([...value.data]));
+                        console.log(comment)
+                    }}>View all comments against post
+                    </button>
                 </p>
                 <p>{body}</p>
+                <hr/>
+                {comment.map(value => <div><b>{value.name}:</b> {value.body}</div>)}
+                <hr/>
+                <hr/>
             </div>
         </div>
     );
 }
-
-
-// export default function Post({postsDataBlock: {id, title, body}, commentsInfo}) {
-//     return (
-//         <div>
-//             <p>#{id} - {title}</p>
-//             <p>
-//                 {body}</p>
-//             <button
-//                 onClick={() => {
-//                     commentsInfo(id);
-//                     localStorage.setItem("stylePosts", JSON.stringify('none'));
-//                     localStorage.setItem("styleComments", JSON.stringify('block'));
-//                 }}
-//             >View all comments on post
-//             </button>
-//         </div>
-//     );
-//
-// }
