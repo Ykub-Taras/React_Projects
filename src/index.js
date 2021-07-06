@@ -22,11 +22,11 @@ const counterReducer = (state = initialState, action)    => {
             console.log('random=', x)
             return {...state, counterValue: state.counterValue + x};
         }
-        case 'RESET': {
-            return {...state, counterValue: 0};
-        }
         case 'INPUTED': {
             return {...state, counterValue: state.counterValue + action.payload};
+        }
+        case 'RESET': {
+            return {...state, counterValue: 0};
         }
         default:
             return state;

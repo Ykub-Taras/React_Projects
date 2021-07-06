@@ -1,6 +1,14 @@
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+
 import './App.css';
 import {useSelector, useDispatch} from "react-redux";
 import {useState} from "react";
+import Users from "./components/users/Users";
+import Posts from "./components/posts/Posts";
+import Comments from "./components/comments/Comments";
+import Albums from "./components/albums/Albums";
+import Photos from "./components/photos/Photos";
+import Todos from "./components/todos/Todos";
 
 
 export default function App() {
@@ -33,7 +41,36 @@ export default function App() {
                        onChange={onInput}/>
                 <button onClick={event => dispatch({type: 'INPUTED', payload: +inputedNumber})}>Submit number</button>
             </form>
-<hr/>
+            <hr/>
+
+            <Router>
+                <div>
+                    <Link to={'/users'}>Users</Link>
+                    <br/>
+                    <Link to={'/posts'}>Posts</Link>
+                    <br/>
+                    <Link to={'/comments'}>Comments</Link>
+
+                    <br/>
+                    <Link to={'/albums'}>Albums</Link>
+                    <br/>
+                    <Link to={'/photos'}>Photos</Link>
+                    <br/>
+                    <Link to={'/todos'}>Todos</Link>
+                    <hr/>
+                    <Switch>
+                        {/*<Route exact path={'/users'}>#</Route>*/}
+                        <Route exact path={'/users'} render={() => <Users/>}/>
+                        <Route exact path={'/posts'} render={() => <Posts/>}/>
+                        <Route exact path={'/comments'} render={() => <Comments/>}/>
+                        <Route exact path={'/albums'} render={() => <Albums/>}/>
+                        <Route exact path={'/photos'} render={() => <Photos/>}/>
+                        <Route exact path={'/todos'} render={() => <Todos/>}/>
+                    </Switch>
+                </div>
+            </Router>
+
+
         </div>
     );
 }
