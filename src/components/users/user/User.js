@@ -1,18 +1,15 @@
-import {getPost} from "../../../services/api";
-import {useState} from "react";
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import UserDetails from "./UserDetails";
 
-export default function User({userDataBlock: {id, name, username}}) {
-    let [post, setPost] = useState([])
+export default function User({userDataBlock: {id, name}}) {
     return (
-        <div>
-            <h2>{name}, # {id} ({username})
-                <button onClick={() => {
-                    getPost(id).then(value => setPost([...value.data]));
-                    console.log(post);
-                }}>View all posts of user
-                </button>
-            </h2>
-            {post.map(value => <div><b>{value.title}:</b> {value.body}</div>)}
-        </div>
+        <Router>
+            <div>
+                {id}.{name} - <Link to={'/usersDetails'}>User Details</Link>
+                <Switch>
+                    <Route exact path={'/usersDetails'} render={() => <UserDetails id={id}/>}/>
+                </Switch>
+            </div>
+        </Router>
     );
 }

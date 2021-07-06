@@ -1,24 +1,15 @@
-import {useState} from "react";
-import {getComment} from "../../../services/api";
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import PostDetails from "./PostDetails";
 
-export default function Post({postDataBlock: {id, title, body}}) {
-    let [comment, setComment] = useState([])
+export default function Post({postDataBlock: {id, title}}) {
     return (
-        <div>
+        <Router>
             <div>
-                <p>#{id} - {title}
-                    <button onClick={() => {
-                        getComment(id).then(value => setComment([...value.data]));
-                        console.log(comment)
-                    }}>View all comments against post
-                    </button>
-                </p>
-                <p>{body}</p>
-                <hr/>
-                {comment.map(value => <div><b>{value.name}:</b> {value.body}</div>)}
-                <hr/>
-                <hr/>
+                {id}.{title} - <Link to={'/postsDetails'}>Post Details</Link>
+                <Switch>
+                    <Route exact path={'/postsDetails'} render={() => <PostDetails id={id}/>}/>
+                </Switch>
             </div>
-        </div>
+        </Router>
     );
 }
