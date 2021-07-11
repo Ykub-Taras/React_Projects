@@ -1,16 +1,22 @@
 import {getComments} from "../../services/api";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Comment from "./comment/Comment";
+import Links from "../component_depot/Links";
+import {useSelector, useDispatch} from "react-redux"
 
 export default function Comments() {
-    let [comments, setComments] = useState([]);
+    const dispatch = useDispatch();
+    const comments = useSelector(({commentsData}) => commentsData)
     useEffect(() => {
         getComments().then(value => {
-            setComments([...value.data])
+            dispatch({type: 'COMMENTS', payload: [...value.data]})
         });
-    }, []);
+    }, [dispatch]);
     return (
         <div>
+            <Links/>
+            <hr/>
             {comments.map(value => <Comment key={value.id} commentDataBlock={value}/>)}
         </div>
-    );}
+    );
+}

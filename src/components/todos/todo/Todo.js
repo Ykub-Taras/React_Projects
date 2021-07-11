@@ -1,9 +1,9 @@
-
-export default function Todo({todoDataBlock: {id, title}}) {
+export default function Todo({todoDataBlock: {userId, id, title, completed}}) {
     return (
-            <div>
-                {id}.{title}
+        <div>{userId} / {id}:<br/>
+            Status - {`${completed}`}<br/>
+             {title}
 
-            </div>
+        </div>
     );
 }

@@ -1,16 +1,22 @@
 import {getPosts} from "../../services/api";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Post from "./post/Post";
+import Links from "../component_depot/Links";
+import {useSelector, useDispatch} from "react-redux";
 
 export default function Posts() {
-    let [posts, setPosts] = useState([]);
+    const dispatch = useDispatch();
+    const posts = useSelector(({postsData}) => postsData)
     useEffect(() => {
         getPosts().then(value => {
-            setPosts([...value.data])
+            dispatch({type:'POSTS', payload: [...value.data]})
+
         });
-    }, []);
+    }, [dispatch]);
     return (
         <div>
+            <Links/>
+            <hr/>
             {posts.map(value => <Post key={value.id} postDataBlock={value}/>)}
         </div>
     );}

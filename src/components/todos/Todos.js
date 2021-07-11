@@ -1,16 +1,22 @@
 import {getTodos} from "../../services/api";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Todo from "./todo/Todo";
+import Links from "../component_depot/Links";
+import {useSelector, useDispatch} from "react-redux";
 
 export default function Users() {
-    let [todos, setTodos] = useState([]);
+    const dispatch = useDispatch();
+    const todos = useSelector(({todosData}) => todosData)
     useEffect(() => {
         getTodos().then(value => {
-            setTodos([...value.data])
+            dispatch({type: 'TODOS', payload: [...value.data]})
         });
-    }, []);
+    }, [dispatch]);
     return (
         <div>
+            <Links/>
+            <hr/>
             {todos.map(value => <Todo key={value.id} todoDataBlock={value}/>)}
         </div>
-    );}
+    );
+}

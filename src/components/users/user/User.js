@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 export default function User({userDataBlock: {id, name}}) {
     return (

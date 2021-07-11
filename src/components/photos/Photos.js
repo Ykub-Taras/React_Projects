@@ -1,16 +1,22 @@
 import {getPhotos} from "../../services/api";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Photo from "./photo/Photo";
+import Links from "../component_depot/Links";
+import {useSelector, useDispatch} from "react-redux";
 
 export default function Users() {
-    let [photos, setPhotos] = useState([]);
+    const dispatch = useDispatch();
+    const photos = useSelector(({photosData}) => photosData)
     useEffect(() => {
         getPhotos().then(value => {
-            setPhotos([...value.data])
+            dispatch({type: 'PHOTOS', payload: [...value.data]})
         });
-    }, []);
+    }, [dispatch]);
     return (
         <div>
+            <Links/>
+            <hr/>
             {photos.map(value => <Photo key={value.id} photoDataBlock={value}/>)}
         </div>
-    );}
+    );
+}
