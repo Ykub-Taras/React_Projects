@@ -3,7 +3,7 @@ import {
     LOADING_TRUE,
     LOADING_FALSE,
     PUSH_TODO,
-} from '../actionTypes/index'
+} from '../actionTypes'
 
 const initialState = {
     todos: [],
@@ -11,6 +11,7 @@ const initialState = {
 }
 
 export const todosReducer = (state = initialState, action) => {
+    console.log(action);
     switch (action.type) {
         case ADD_TODOS: {
             return {...state, todos: action.payload}

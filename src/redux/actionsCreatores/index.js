@@ -1,9 +1,8 @@
-
 import {
     ADD_TODOS,
     LOADING_TRUE,
     LOADING_FALSE,
-    PUSH_TODO
+    PUSH_TODO,
 } from '../actionTypes';
 
 export const setLoadingFalse = () => ({type: LOADING_FALSE})
