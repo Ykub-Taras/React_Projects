@@ -29,12 +29,13 @@ function App() {
     }
     const todos = useSelector(({todosReducer}) => todosReducer.todos);
     const todosLoading = useSelector(({todosReducer}) => todosReducer.todosLoading);
+
     return (
         <div className="App">
-            <CreateTodoForm onSubmit={onTodoCreate}/>
+            <CreateTodoForm todosLoading={todosLoading} onSubmit={onTodoCreate}/>
             <hr/>
-            <Todos todos={todos} isLoading={todosLoading}/>
+            <Todos todos={todos}/>
         </div>
     )
 }
-export default App;
+export default App
