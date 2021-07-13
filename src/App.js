@@ -9,9 +9,7 @@ import CreateTodoForm from "./components/ImputForm";
 
 
 function App() {
-    const {todos, todosLoading} = useSelector(store => store.todosReducer);
     const dispatch = useDispatch();
-
     useEffect(() => {
         getTodos().then(value => {
             dispatch(addTodos([...value.data]))
@@ -19,7 +17,6 @@ function App() {
             .catch(e => console.log(e))
             .finally(() => dispatch(setLoadingFalse()))
     }, [dispatch])
-
 
     const onTodoCreate = async (title, description) => {
         if (!title || !description) return;
@@ -30,37 +27,14 @@ function App() {
             dispatch(pushTodo({...value.data}))
         })
     }
-
+    const todos = useSelector(({todosReducer}) => todosReducer.todos);
+    const todosLoading = useSelector(({todosReducer}) => todosReducer.todosLoading);
     return (
         <div className="App">
             <CreateTodoForm onSubmit={onTodoCreate}/>
+            <hr/>
             <Todos todos={todos} isLoading={todosLoading}/>
         </div>
-    );
+    )
 }
 export default App;
-
-
-
-//---------------------------------------------------------------------
-
-// import './App.css';
-//
-// import {BrowserRouter as Router} from 'react-router-dom';
-//
-// import Routes from "./components/redux/Routes";
-// import NavMenu from "./components/redux/NavMenu";
-//
-//
-// export default function App() {
-//
-//     return (
-//         <div>
-//             <Router>
-//                 <NavMenu/>
-//                 <hr/>
-//                 <Routes/>
-//             </Router>
-//         </div>
-//     )
-// }
