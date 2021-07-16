@@ -32,8 +32,12 @@ const TodosBlock = () => {
                 dispatch({type: 'TODOLISTEDITRESULT', payload: todoArray})
             }
         }
+    function buttonClick (value) {
+            setInputtedTitle(value.title);
+            setInputtedBody(value.body);
+            dispatch({type: 'TODOLISTEDIT', payload: [{title: value.title, body: value.body}]}); return (<div>!</div>)}
 
-        return (
+    return (
             <div>
                 <form onSubmit={onSubmit}>
                     <input type="text" name={'Name'} value={inputtedTitle}
@@ -49,17 +53,11 @@ const TodosBlock = () => {
                     </button>
                 </form>
                 <hr/>
-
-
                 <div>
                     {todoList.length !== 0 ?
                         (todoList.map((value, index) => (<div><h3>{++index}: {value.title}</h3>
                             <p><i>{value.body}</i></p>
-                            <button onClick={() => (setInputtedTitle(value.title), setInputtedBody(value.body), dispatch({
-                                type: 'TODOLISTEDIT',
-                                payload: [{title: value.title, body: value.body}]
-                            }))}
-                            >
+                            <button onClick={()=>buttonClick(value)}>
                                 Edit
                             </button>
                             <button onClick={() => dispatch({type: 'TODOLISTDELETE', payload: value})}>DELETE
