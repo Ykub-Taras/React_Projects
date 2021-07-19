@@ -2,7 +2,7 @@ import {
     ADD_TODOS,
     LOADING_TRUE,
     LOADING_FALSE,
-    PUSH_TODO,
+    PUSH_TODO, DELETE_TODO,
 } from '../actionTypes'
 
 const initialState = {
@@ -24,6 +24,9 @@ export const todosReducer = (state = initialState, action) => {
         }
         case PUSH_TODO: {
             return {...state, todos: [...state.todos, action.payload]}
+        }
+        case DELETE_TODO: {
+            return {...state, todos: state.todos.filter(value => value.id !== action.payload)}
         }
         default:
             return state

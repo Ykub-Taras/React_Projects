@@ -2,17 +2,17 @@ import React, {useEffect} from 'react'
 import './App.css';
 
 import {useDispatch, useSelector} from "react-redux";
-import {addTodos, pushTodo, setLoadingFalse,} from "./redux/actionsCreatores";
-import {createTodo, getTodos} from "./services/api";
+import {addTodos, deleteTodo, pushTodo, setLoadingFalse,} from "./redux/actionsCreatores";
+import {createTodo, deleteTodoByID, getTodos} from "./services/api";
 import CreateTodoForm from "./components/ImputForm";
 import Todos from "./components/TodosList";
+import {BrowserRouter} from "react-router-dom";
 
 
 function App() {
     const todosLoading = useSelector(({todosReducer}) => todosReducer.todosLoading);
     const dispatch = useDispatch();
     const todos = useSelector(({todosReducer}) => todosReducer.todos);
-
     useEffect(() => {
         getTodos().then(value => {
             dispatch(addTodos([...value.data]))
@@ -31,11 +31,19 @@ function App() {
         })
     }
 
+    const onDeleteTodo = async (id) => {
+        console.log('ajsdhga');
+        await deleteTodoByID(id).then(response => response.data);
+        dispatch(deleteTodo(id))
+    }
     return (
         <div className="App">
-            <CreateTodoForm todosLoading={todosLoading} onSubmit={onTodoCreate}/>
-            <hr/>
-            <Todos/>
+                <BrowserRouter>
+                <CreateTodoForm todosLoading={todosLoading} onSubmit={onTodoCreate}/>
+                <hr/>
+                <Todos onDeleteTodo={onDeleteTodo} todos={todos}/>
+            </BrowserRouter>
+
         </div>
     )
 }
